@@ -118,7 +118,10 @@
 /*---- 메인 컨텐츠 스타일 ----*/
 main {
   flex: 1;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 3rem;
 }
 
 @media (max-width: 768px) {
@@ -130,7 +133,7 @@ main {
 /*---- 히어로(소개) 섹션 ----*/
 .hero__section {
   width: 100%;
-  max-width: 70rem;
+  max-width: 95rem;
   display: flex;
   align-items: center;
   gap: 5rem;
@@ -193,4 +196,26 @@ main {
   .hero__section {
     flex-direction: column;
   }
+}
+
+/*---- 스킬 테그 섹션 ----*/
+.skills__section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-right: auto;
+  padding: 5rem 0;
+}
+
+.skills__contents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.skills__tag {
+  padding: 0.5rem 1rem;
+  border-radius: 1.2rem;
+  color: white;
+  background-color: var(--color-primary);
 }

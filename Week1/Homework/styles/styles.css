@@ -40,7 +40,6 @@
 
 .container {
   display: flex;
-  margin-top: 10rem;
   padding: 0 2rem;
   width: 100%;
 }
@@ -55,6 +54,7 @@
 .nav__sidebar {
   position: sticky;
   top: 10rem;
+  margin-top: 10rem;
   width: 13rem;
   z-index: 1000;
 }
@@ -94,6 +94,7 @@
     position: fixed;
     top: 7rem;
     left: 0;
+    margin-top: 0;
     width: 100%;
   }
   .nav__sidebar ul {
@@ -123,5 +124,73 @@ main {
 @media (max-width: 768px) {
   main {
     margin-top: 3rem;
+  }
+}
+
+/*---- 히어로(소개) 섹션 ----*/
+.hero__section {
+  width: 100%;
+  max-width: 70rem;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  margin-top: 7rem;
+  padding: 2.5rem 3rem;
+  border-radius: 0 0 3rem 3rem;
+  background-color: white;
+  box-shadow: 0 0 10px #ff597617;
+}
+
+.hero__section img {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: 0.2s all;
+}
+
+.hero__section img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #ff597630;
+}
+
+.hero__section_info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.hero__section_info p {
+  color: #424242;
+}
+
+.hero__section_info_btns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hero__section_info_btns .btn {
+  padding: 0.6rem 1.3rem;
+  border-radius: 2rem;
+  transition: 0.1s all;
+}
+
+.hero__section_info_btns .btn:hover {
+  transform: scale(1.05) translateY(-0.1rem);
+}
+
+.hero__section_info_btns .btn.btn-good {
+  color: white;
+  background-color: var(--color-primary);
+}
+.hero__section_info_btns .btn.btn-bad {
+  color: var(--color-primary);
+  background-color: white;
+  border: 1px solid var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .hero__section {
+    flex-direction: column;
   }
 }

@@ -11,6 +11,7 @@
   flex-grow: 1;
   padding: 1.5rem;
   background-color: white;
+  z-index: 1001;
 }
 
 .header__profile {
@@ -52,15 +53,16 @@
 
 /*---- 사이드바 스타일 ----*/
 .nav__sidebar {
-  position: sticky;
-  top: 10rem;
-  margin-top: 10rem;
   width: 13rem;
   z-index: 1000;
+  height: 100vh;
 }
 
 .nav__sidebar ul {
+  position: sticky;
   width: 100%;
+  top: 10rem;
+  margin-top: 10rem;
   padding: 2rem 1rem;
   border-radius: 1rem;
   background-color: white;

@@ -1,0 +1,28 @@
+/*---- 기본 색상 정의 ----*/
+:root {
+  --color-primary: #ff5976;
+  --color-background: #ffe8ec;
+}
+
+body {
+  background-color: var(--color-background);
+}
+
+/*----  css 초기화 ----*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}

@@ -38,13 +38,29 @@
   gap: 1rem;
 }
 
+.container {
+  display: flex;
+  margin-top: 10rem;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
 /*---- 사이드바 스타일 ----*/
 .nav__sidebar {
   position: sticky;
-  left: 2rem;
-  margin-top: 10rem;
+  top: 10rem;
+  width: 13rem;
+  z-index: 1000;
+}
+
+.nav__sidebar ul {
   width: 100%;
-  max-width: 12rem;
   padding: 2rem 1rem;
   border-radius: 1rem;
   background-color: white;
@@ -78,13 +94,12 @@
     position: fixed;
     top: 7rem;
     left: 0;
-    margin-top: 0;
-    max-width: 100%;
-    padding: 1rem;
-    border-radius: 0;
+    width: 100%;
   }
   .nav__sidebar ul {
     display: flex;
+    padding: 1rem;
+    border-radius: 0;
   }
   .nav__sidebar_menu:not(:last-child),
   .nav__sidebar_menu:first-child,
@@ -96,5 +111,17 @@
     display: block;
     text-align: center;
     font-size: 0.8rem;
+  }
+}
+
+/*---- 메인 컨텐츠 스타일 ----*/
+main {
+  flex: 1;
+  justify-items: center;
+}
+
+@media (max-width: 768px) {
+  main {
+    margin-top: 3rem;
   }
 }

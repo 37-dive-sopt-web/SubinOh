@@ -93,13 +93,14 @@
 
 @media (max-width: 768px) {
   .nav__sidebar {
+    height: 0;
+    width: 100%;
+  }
+  .nav__sidebar ul {
     position: fixed;
     top: 7rem;
     left: 0;
     margin-top: 0;
-    width: 100%;
-  }
-  .nav__sidebar ul {
     display: flex;
     padding: 1rem;
     border-radius: 0;

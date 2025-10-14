@@ -320,3 +320,11 @@ main {
     );
   }
 }
+
+/*---- 한마디 섹션 ----*/
+.phrase__section {
+  width: 95%;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background-color: white;
+}

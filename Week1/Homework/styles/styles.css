@@ -328,3 +328,13 @@ main {
   border-radius: 1.5rem;
   background-color: white;
 }
+
+/*---- 푸터 스타일 ----*/
+#footer {
+  width: 100%;
+  margin-top: 5rem;
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  background-color: var(--color-primary);
+}

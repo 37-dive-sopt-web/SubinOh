@@ -55,7 +55,7 @@
 .nav__sidebar {
   width: 13rem;
   z-index: 1000;
-  height: 100vh;
+  height: auto;
 }
 
 .nav__sidebar ul {
@@ -208,6 +208,7 @@ main {
   gap: 1rem;
   margin-right: auto;
   padding: 4rem 0;
+  scroll-margin-top: 5rem;
 }
 
 /*---- 스킬 테그 섹션 ----*/

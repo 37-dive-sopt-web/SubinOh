@@ -4,6 +4,9 @@
   --color-background: #ffe8ec;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 body {
   background-color: var(--color-background);
 }

@@ -269,3 +269,54 @@ main {
 .card__info-main .card__heart:hover {
   content: url("../images/ic_heart.svg");
 }
+
+/*---- 사진첩 섹션 ----*/
+.pictures__scroll_container {
+  display: flex;
+  gap: 1.5rem;
+  width: 95%;
+  padding: 2rem;
+  border-radius: 2rem;
+  background-color: white;
+  overflow: hidden;
+}
+
+.pictures__scroll_track {
+  --picture-count: 6;
+  --picture-gap: 1.5rem;
+  --picture-width: 16rem;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 1.5rem;
+  animation: scrolling 10s linear infinite;
+}
+
+.pictures__scroll_track img {
+  width: 100%;
+  max-width: 16rem;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 1.5rem;
+}
+
+.pictures__scroll_container:hover .pictures__scroll_track {
+  animation-play-state: paused;
+}
+
+.pictures__scroll_track img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 16px #ff597640;
+}
+
+@keyframes scrolling {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(
+      calc(
+        -1 * var(--picture-count) * (var(--picture-width) + var(--picture-gap))
+      )
+    );
+  }
+}

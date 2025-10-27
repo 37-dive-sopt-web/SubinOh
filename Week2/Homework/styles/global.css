@@ -1,7 +1,7 @@
 /*---- 기본 색상 정의 ----*/
 :root {
   --color-primary: #67e8c3;
-  --color-background: rgb(239, 255, 248);
+  --color-background: #e0f0f0;
 }
 
 html {

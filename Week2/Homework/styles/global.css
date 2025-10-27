@@ -1,9 +1,7 @@
 /*---- 기본 색상 정의 ----*/
 :root {
   --color-primary: #67e8c3;
-  --color-sub: #e2fff7;
-  --color-background: #e0f0f0;
-  --row-hover: #ebfff9;
+  --color-background: rgb(239, 255, 248);
 }
 
 html {

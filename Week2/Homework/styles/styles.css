@@ -133,10 +133,18 @@ section {
   background-color: var(--color-sub);
 }
 
+.members__table tr:hover {
+  background-color: var(--row-hover);
+}
+
 .members__table th,
 td {
   padding: 1rem;
   text-align: center;
+}
+
+.members__table tr td a {
+  color: var(--color-primary);
 }
 
 /*------ 모달 스타일 ------*/

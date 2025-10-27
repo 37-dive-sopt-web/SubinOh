@@ -24,6 +24,7 @@ section {
   padding: 1.5rem;
   border-radius: 1rem;
   background-color: white;
+  min-width: 0;
 }
 
 /*------ 필터 스타일 ------*/
@@ -114,11 +115,13 @@ section {
 }
 
 .members__content {
+  width: 100%;
   overflow-x: auto;
 }
 
 .members__table {
   width: 100%;
+  min-width: 70rem;
   border-spacing: 0px;
 }
 

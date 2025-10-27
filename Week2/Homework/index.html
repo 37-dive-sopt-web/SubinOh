@@ -136,6 +136,89 @@
           </table>
         </div>
       </section>
+
+      <!-- 모달 -->
+      <div class="modal__overlay">
+        <section class="modal__section">
+          <div class="modal__header">
+            <h3>멤버 추가</h3>
+            <button type="button" class="btn-modal-close">
+              <img src="./images/ic-close.svg" alt="모달 닫기" />
+            </button>
+          </div>
+          <form class="modal__form">
+            <div class="modal__form_row">
+              <div class="modal__form_item">
+                <label for="modal_name">이름</label>
+                <input
+                  type="text"
+                  id="modal_name"
+                  placeholder="이름을 입력하세요"
+                />
+              </div>
+            </div>
+            <div class="modal__form_row">
+              <div class="modal__form_item">
+                <label for="modal_name-eg">영문 이름</label>
+                <input
+                  type="text"
+                  id="modal_name-eg"
+                  placeholder="영문 이름을 입력하세요"
+                />
+              </div>
+            </div>
+            <div class="modal__form_row">
+              <div class="modal__form_item">
+                <label for="modal_github">깃허브</label>
+                <input
+                  type="text"
+                  id="modal_github"
+                  placeholder="깃허브 아이디를 입력하세요"
+                />
+              </div>
+            </div>
+            <div class="modal__form_row el-2">
+              <div class="modal__form_item">
+                <label for="modal_gender">성별</label>
+                <select id="modal_gender">
+                  <option value="ALL">전체</option>
+                  <option value="female">여자</option>
+                  <option value="male">남자</option>
+                </select>
+              </div>
+              <div class="modal__form_item">
+                <label for="modal_role">역할</label>
+                <select id="modal_role">
+                  <option value="ALL">전체</option>
+                  <option value="OB">OB</option>
+                  <option value="YB">YB</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal__form_row el-2">
+              <div class="modal__form_item">
+                <label for="modal_team">금잔디조</label>
+                <input
+                  type="number"
+                  min="1"
+                  max="9"
+                  id="modal_team"
+                  placeholder="금잔디조를 입력하세요(1~9)"
+                />
+              </div>
+              <div class="modal__form_item">
+                <label for="modal_age">나이</label>
+                <input
+                  type="number"
+                  id="modal_age"
+                  placeholder="나이를 입력하세요"
+                />
+              </div>
+            </div>
+            <button type="button" class="btn-modal-add">추가</button>
+          </form>
+        </section>
+      </div>
     </main>
   </body>
 </html>

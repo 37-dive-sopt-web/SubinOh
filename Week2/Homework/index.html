@@ -14,6 +14,85 @@
       <h1>웹계인 관리 페이지</h1>
       <p>🛸DIVE SOPT 37기 웹파트 오수빈🛸</p>
     </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main>
+      <!-- 필터 섹션 -->
+      <section class="filter__section">
+        <h3>검색 필터</h3>
+        <form class="filter__form">
+          <div class="filter__row">
+            <div class="filter-item">
+              <label for="user_name">이름</label>
+              <input
+                type="text"
+                id="user_name"
+                placeholder="이름을 입력하세요"
+              />
+            </div>
+          </div>
+          <div class="filter__row">
+            <div class="filter-item">
+              <label for="user_name-eg">영문 이름</label>
+              <input
+                type="text"
+                id="user_name-eg"
+                placeholder="영문 이름을 입력하세요"
+              />
+            </div>
+          </div>
+          <div class="filter__row el-3">
+            <div class="filter-item">
+              <label for="user_github">깃허브</label>
+              <input
+                type="text"
+                id="user_github"
+                placeholder="깃허브 아이디를 입력하세요"
+              />
+            </div>
+            <div class="filter-item">
+              <label for="user_gender">성별</label>
+              <select id="user_gender">
+                <option value="ALL">전체</option>
+                <option value="female">여자</option>
+                <option value="male">남자</option>
+              </select>
+            </div>
+            <div class="filter-item">
+              <label for="user_role">역할</label>
+              <select id="user_role">
+                <option value="ALL">전체</option>
+                <option value="OB">OB</option>
+                <option value="YB">YB</option>
+              </select>
+            </div>
+          </div>
+          <div class="filter__row el-2">
+            <div class="filter-item">
+              <label for="user_team">금잔디조</label>
+              <input
+                type="number"
+                min="1"
+                max="9"
+                id="user_team"
+                placeholder="금잔디조를 입력하세요(1~9)"
+              />
+            </div>
+            <div class="filter-item">
+              <label for="user_age">나이</label>
+              <input
+                type="number"
+                id="user_age"
+                placeholder="나이를 입력하세요"
+              />
+            </div>
+          </div>
+          <div class="filter__row el-2">
+            <button type="button" class="btn-submit">적용</button>
+            <button type="button" class="btn-reset">초기화</button>
+          </div>
+        </form>
+      </section>
+    </main>
   </body>
-  <script type="module" src="./index.js"></script>
 </html>

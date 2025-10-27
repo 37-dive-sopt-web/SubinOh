@@ -6,3 +6,74 @@ header {
   padding: 2rem 0;
   background-color: var(--color-primary);
 }
+
+/*------ 메인 컨텐츠 ------*/
+main {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 2rem;
+
+  width: 100%;
+  max-width: 80rem;
+  padding: 2rem 1rem;
+  margin: 0 auto;
+}
+
+/*------ 필터 스타일 ------*/
+.filter__section {
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background-color: white;
+}
+
+.filter__form {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  row-gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.filter__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 0.5rem;
+}
+
+.filter__row.el-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.filter__row.el-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.filter__row button {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-primary);
+  transform: background-color 0.3s;
+}
+
+.filter__row button:hover {
+  background-color: var(--color-sub);
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-item label {
+  min-width: 5rem;
+  font-weight: 500;
+}
+
+.filter-item input,
+select {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  border: 1px solid rgb(197, 197, 197);
+}

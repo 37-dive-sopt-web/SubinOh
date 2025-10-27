@@ -71,7 +71,7 @@ section {
 }
 
 .filter-item input,
-select {
+.filter-item select {
   flex: 1;
   padding: 0.5rem;
   border-radius: 0.4rem;
@@ -122,4 +122,85 @@ select {
 td {
   padding: 0.5rem;
   text-align: center;
+}
+
+/*------ 모달 스타일 ------*/
+.modal__overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(156, 156, 156, 0.466);
+}
+
+.modal__section {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
+  width: 30%;
+  height: 60%;
+  min-width: 20rem;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+}
+
+.modal__section::-webkit-scrollbar {
+  display: none;
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.modal__header button img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal__form_row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.modal__form_row.el-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.modal__form_item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.modal__form_item input,
+.modal__form_item select {
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  border: 1px solid rgb(197, 197, 197);
+}
+
+.btn-modal-add {
+  width: 5rem;
+  padding: 0.5rem 0.3rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-primary);
+  transition: background-color 0.2s;
+  margin-left: auto;
+}
+
+.btn-modal-add:hover {
+  background-color: var(--color-sub);
 }

@@ -1,0 +1,8 @@
+/*------ 헤더 스타일 ------*/
+header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  padding: 2rem 0;
+  background-color: var(--color-primary);
+}

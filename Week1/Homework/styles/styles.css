@@ -229,10 +229,14 @@ main {
 }
 
 /*---- 카드 섹션 ----*/
+.cards__section {
+  width: 95%;
+}
+
 .cards__contents {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1rem;
 }
 
 .card__wrapper {

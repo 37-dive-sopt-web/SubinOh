@@ -1,4 +1,4 @@
-import { members } from "./data.js";
+import { members } from "../data/data.js";
 
 /**
  * 멤버 데이터 초기 세팅

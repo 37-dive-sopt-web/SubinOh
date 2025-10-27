@@ -45,7 +45,7 @@
   width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
   .container {
     flex-direction: column;
   }
@@ -93,7 +93,7 @@
   background-color: var(--color-primary);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
   .nav__sidebar {
     height: 0;
     width: 100%;
@@ -129,9 +129,15 @@ main {
   padding: 0 3rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
   main {
     margin-top: 3rem;
+  }
+}
+
+@media (max-width: 470px) {
+  main {
+    padding: 0 1rem;
   }
 }
 
@@ -197,7 +203,7 @@ main {
   border: 1px solid var(--color-primary);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
   .hero__section {
     flex-direction: column;
   }
@@ -275,6 +281,27 @@ main {
 
 .card__info-main .card__heart:hover {
   content: url("../images/ic_heart.svg");
+}
+
+@media (max-width: 1080px) {
+  .cards__contents {
+    grid-template-columns: repeat(2, minmax(5rem, auto));
+  }
+  .card__wrapper {
+    max-width: 13rem;
+    max-height: 19rem;
+  }
+  .card__info-main,
+  .card__info-sub {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 470px) {
+  .cards__contents {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
 }
 
 /*---- 사진첩 섹션 ----*/

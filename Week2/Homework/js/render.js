@@ -39,7 +39,7 @@ function renderMembers(member) {
     }
     tr.appendChild(td);
   });
-  tbody.appendChild(tr);
+  return tr;
 }
 
 /**
@@ -47,7 +47,16 @@ function renderMembers(member) {
  */
 function renderAllMembers() {
   tbody.innerHTML = "";
-  getMembers().forEach(renderMembers);
+
+  const members = getMembers();
+  const fragment = new DocumentFragment();
+
+  members.forEach((member) => {
+    const tr = renderMembers(member);
+    fragment.appendChild(tr);
+  });
+
+  tbody.appendChild(fragment);
 }
 
 export { renderMembers, renderAllMembers };

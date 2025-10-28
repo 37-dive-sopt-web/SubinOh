@@ -30,9 +30,14 @@ function filterMembers() {
     });
   });
   tbody.innerHTML = "";
+  const fragment = new DocumentFragment();
+
   new_members.forEach((member) => {
-    renderMembers(member);
+    const tr = renderMembers(member);
+    fragment.appendChild(tr);
   });
+
+  tbody.appendChild(fragment);
 }
 
 // (2) 필터링 적용 버튼 함수

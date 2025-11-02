@@ -1,0 +1,374 @@
+/*---- 헤더 스타일 ----*/
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-grow: 1;
+  padding: 1.5rem;
+  background-color: white;
+  z-index: 1001;
+}
+
+.header__profile {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+
+.header__profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header__info {
+  text-align: center;
+}
+
+.header__info p {
+  color: #a6a6a6;
+}
+
+.header__links {
+  display: flex;
+  gap: 1rem;
+}
+
+.container {
+  display: flex;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+@media (max-width: 1080px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
+/*---- 사이드바 스타일 ----*/
+.nav__sidebar {
+  width: 13rem;
+  z-index: 1000;
+  height: auto;
+}
+
+.nav__sidebar ul {
+  position: sticky;
+  width: 100%;
+  top: 10rem;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  background-color: white;
+}
+
+.nav__sidebar_menu {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.8rem;
+  transition: 0.1s all;
+}
+
+.nav__sidebar_menu:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.nav__sidebar_menu:first-child {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.nav__sidebar_menu:last-child {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.nav__sidebar_menu:hover {
+  color: white;
+  background-color: var(--color-primary);
+}
+
+@media (max-width: 1080px) {
+  .nav__sidebar {
+    height: 0;
+    width: 100%;
+  }
+  .nav__sidebar ul {
+    position: fixed;
+    top: 7rem;
+    left: 0;
+    margin-top: 0;
+    display: flex;
+    padding: 1rem;
+    border-radius: 0;
+  }
+  .nav__sidebar_menu:not(:last-child),
+  .nav__sidebar_menu:first-child,
+  .nav__sidebar_menu:last-child {
+    border-radius: 0.8rem;
+    margin-bottom: 0;
+  }
+  .nav__sidebar_menu a {
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+  }
+}
+
+/*---- 메인 컨텐츠 스타일 ----*/
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 3rem;
+}
+
+@media (max-width: 1080px) {
+  main {
+    margin-top: 3rem;
+  }
+}
+
+@media (max-width: 470px) {
+  main {
+    padding: 0 1rem;
+  }
+}
+
+/*---- 히어로(소개) 섹션 ----*/
+.hero__section {
+  width: 100%;
+  max-width: 95rem;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  margin-top: 7rem;
+  padding: 2.5rem 3rem;
+  border-radius: 0 0 3rem 3rem;
+  background-color: white;
+  box-shadow: 0 0 10px #ff597617;
+}
+
+.hero__section img {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: 0.2s all;
+}
+
+.hero__section img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #ff597630;
+}
+
+.hero__section_info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.hero__section_info p {
+  color: #424242;
+}
+
+.hero__section_info_btns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hero__section_info_btns .btn {
+  padding: 0.6rem 1.3rem;
+  border-radius: 2rem;
+  transition: 0.1s all;
+}
+
+.hero__section_info_btns .btn:hover {
+  transform: scale(1.05) translateY(-0.1rem);
+}
+
+.hero__section_info_btns .btn.btn-good {
+  color: white;
+  background-color: var(--color-primary);
+}
+.hero__section_info_btns .btn.btn-bad {
+  color: var(--color-primary);
+  background-color: white;
+  border: 1px solid var(--color-primary);
+}
+
+@media (max-width: 1080px) {
+  .hero__section {
+    flex-direction: column;
+  }
+}
+
+/*---- 섹션 공통 스타일 ----*/
+.section__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-right: auto;
+  padding: 4rem 0;
+  scroll-margin-top: 5rem;
+}
+
+/*---- 스킬 테그 섹션 ----*/
+.skills__contents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.skills__tag {
+  padding: 0.5rem 1rem;
+  border-radius: 1.2rem;
+  color: white;
+  background-color: var(--color-primary);
+}
+
+/*---- 카드 섹션 ----*/
+.cards__section {
+  width: 95%;
+}
+
+.cards__contents {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+
+.card__wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 16rem;
+  max-height: 22rem;
+  border-radius: 1.5rem;
+  background-color: white;
+  overflow: hidden;
+  transition: 0.2s all;
+}
+
+.card__wrapper:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0 0 16px #ff597640;
+}
+
+.card__img {
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+}
+
+.card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.3rem;
+}
+
+.card__info-main {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.card__info-main .card__heart:hover {
+  content: url("../images/ic_heart.svg");
+}
+
+@media (max-width: 1080px) {
+  .cards__contents {
+    grid-template-columns: repeat(2, minmax(5rem, auto));
+  }
+  .card__wrapper {
+    max-width: 13rem;
+    max-height: 19rem;
+  }
+  .card__info-main,
+  .card__info-sub {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 470px) {
+  .cards__contents {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
+
+/*---- 사진첩 섹션 ----*/
+.pictures__scroll_container {
+  display: flex;
+  gap: 1.5rem;
+  width: 95%;
+  padding: 2rem;
+  border-radius: 2rem;
+  background-color: white;
+  overflow: hidden;
+}
+
+.pictures__scroll_track {
+  --picture-count: 6;
+  --picture-gap: 1.5rem;
+  --picture-width: 16rem;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 1.5rem;
+  animation: scrolling 10s linear infinite;
+}
+
+.pictures__scroll_track img {
+  width: 100%;
+  max-width: 16rem;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 1.5rem;
+}
+
+.pictures__scroll_container:hover .pictures__scroll_track {
+  animation-play-state: paused;
+}
+
+.pictures__scroll_track img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 16px #ff597640;
+}
+
+@keyframes scrolling {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(
+      calc(
+        -1 * var(--picture-count) * (var(--picture-width) + var(--picture-gap))
+      )
+    );
+  }
+}
+
+/*---- 한마디 섹션 ----*/
+.phrase__section {
+  width: 95%;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background-color: white;
+}
+
+/*---- 푸터 스타일 ----*/
+#footer {
+  width: 100%;
+  margin-top: 5rem;
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  background-color: var(--color-primary);
+}

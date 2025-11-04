@@ -17,6 +17,7 @@ export function useGameState(initialLevel = 1) {
   const [gameHistory, setGameHistory] = useState([]); // 게임 히스토리
 
   const [time, setTime] = useState(TIME_LIMIT[initialLevel] * 1000); // 게임 시간(카운트다운)
+
   const animationFrameId = useRef(null); // requestAnimationFrame ref
   const deadline = useRef(null); // 게임 데드라인 (절대시간)
 
@@ -33,24 +34,21 @@ export function useGameState(initialLevel = 1) {
   }, []);
 
   // 카드 덱 생성 함수
-  const handleGenerateDeck = useCallback(
-    (level) => {
-      const data = buildDeck(level);
-      setDeckInfo({ status: "ready", data, level });
+  const handleGenerateDeck = useCallback((level) => {
+    const data = buildDeck(level);
+    setDeckInfo({ status: "ready", data, level });
 
-      setCurrentClickCard([]);
-      setIsChecking(false);
-      setGameState(GAME_STATE.READY);
-      setGameId((id) => id + 1);
-      setSuccessDeck(0);
-      setGameHistory([]);
+    setCurrentClickCard([]);
+    setIsChecking(false);
+    setGameState(GAME_STATE.READY);
+    setGameId((id) => id + 1);
+    setSuccessDeck(0);
+    setGameHistory([]);
 
-      cancelAnimationFrame(animationFrameId.current);
-      const new_time = TIME_LIMIT[initialLevel] * 1000;
-      setTime(new_time);
-    },
-    [initialLevel]
-  );
+    cancelAnimationFrame(animationFrameId.current);
+    const new_time = TIME_LIMIT[level] * 1000;
+    setTime(new_time);
+  }, []);
 
   // 카드 덱 초기화
   useEffect(() => {
@@ -115,7 +113,6 @@ export function useGameState(initialLevel = 1) {
         ) {
           setGameState(GAME_STATE.WIN);
           cancelAnimationFrame(animationFrameId.current);
-          alert("성공: " + time);
         }
         setCurrentClickCard([]);
         setIsChecking(false);

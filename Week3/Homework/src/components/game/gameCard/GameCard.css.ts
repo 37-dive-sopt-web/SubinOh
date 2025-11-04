@@ -63,6 +63,10 @@ export const wrapper = recipe({
   },
 
   variants: {
+    level: {
+      2: { width: "8rem", height: "8rem" },
+      3: { width: "6rem", height: "6rem" },
+    },
     isFlipped: {
       true: { transform: "rotateY(180deg)" },
     },

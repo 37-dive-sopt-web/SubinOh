@@ -6,7 +6,12 @@ export function GameBoard({ deckInfo, onCardClick }) {
   return (
     <div className={styles.wrapper({ level: deckInfo.level })}>
       {deckInfo.data.map((card) => (
-        <GameCard key={card.id} card={card} onCardClick={onCardClick} />
+        <GameCard
+          key={card.id}
+          level={deckInfo.level}
+          card={card}
+          onCardClick={onCardClick}
+        />
       ))}
     </div>
   );

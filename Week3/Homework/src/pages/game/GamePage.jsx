@@ -45,6 +45,7 @@ function GamePage() {
         </div>
         <div className={styles.progress}>
           <GameProgress
+            onLevelChange={handleGenerateDeck}
             deckInfo={deckInfo}
             gameState={gameState}
             time={time}

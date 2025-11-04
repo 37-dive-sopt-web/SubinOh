@@ -21,7 +21,6 @@ export const layout = style({
 export const board = style({
   display: "flex",
   flexDirection: "column",
-  alignItems: "center",
   width: "100%",
   paddingBottom: "3rem",
 });

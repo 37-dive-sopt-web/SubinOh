@@ -1,9 +1,10 @@
 import * as styles from "./GameCard.css";
 
-export function GameCard({ card, onCardClick }) {
+export function GameCard({ level, card, onCardClick }) {
   return (
     <div
       className={styles.wrapper({
+        level: level,
         isFlipped: card.isClicked,
         isMatched: card.isMatched,
       })}

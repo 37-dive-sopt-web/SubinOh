@@ -5,6 +5,7 @@ import { GameHistory } from "../gameHistory/GameHistory";
 import * as styles from "./GameProgress.css";
 
 export function GameProgress({
+  onLevelChange,
   deckInfo,
   time,
   gameState,
@@ -13,7 +14,7 @@ export function GameProgress({
 }) {
   return (
     <div className={styles.layout}>
-      <GameSelect />
+      <GameSelect level={deckInfo.level} onLevelChange={onLevelChange} />
       <GameState time={time} deckInfo={deckInfo} successDeck={successDeck} />
       <GameMessage gameState={gameState} />
       <GameHistory history={history} />

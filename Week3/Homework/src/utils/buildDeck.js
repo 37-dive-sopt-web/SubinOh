@@ -23,8 +23,18 @@ export function buildDeck(level) {
   const duplicated = [];
   for (let i = 0; i < base.length; i += 1) {
     const v = base[i];
-    duplicated.push({ id: `${v}-a`, value: v });
-    duplicated.push({ id: `${v}-b`, value: v });
+    duplicated.push({
+      id: `${v}-a`,
+      value: v,
+      isClicked: false,
+      isMatched: false,
+    });
+    duplicated.push({
+      id: `${v}-b`,
+      value: v,
+      isClicked: false,
+      isMatched: false,
+    });
   }
 
   // 매 게임마다 다른 배치를 위해 마지막에 셔플

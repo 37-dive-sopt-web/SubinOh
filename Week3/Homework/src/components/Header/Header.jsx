@@ -3,11 +3,8 @@ import * as styles from "./Header.css";
 export function Header({ tab, setTab }) {
   // 게임 탭 변경
   const handleChangeTab = (type) => {
-    if (type === "game") {
-      setTab("game");
-    } else if (type === "rank") {
-      setTab("rank");
-    }
+    if (type !== "game" && type !== "rank") return;
+    setTab(type);
   };
 
   return (

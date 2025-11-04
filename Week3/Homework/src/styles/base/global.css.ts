@@ -8,12 +8,10 @@ globalStyle(":root", {
 
 /** HTML & Body style */
 globalStyle("html, body", {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
   width: "100%",
   margin: "0",
   padding: "0",
+  boxSizing: "border-box",
   scrollBehavior: "smooth",
   fontSize: "62.5%",
   backgroundColor: themeVars.color.pink[100],
@@ -26,6 +24,8 @@ globalStyle("::-webkit-scrollbar", {
 
 /** default style */
 export const globalLayout = style({
+  display: "flex",
+  justifyContent: "center",
   width: "100%",
   height: "100%",
   ...themeVars.text.body1,

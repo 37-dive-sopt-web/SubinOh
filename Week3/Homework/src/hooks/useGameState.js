@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { buildDeck } from "../utils/buildDeck";
-import { GAME_STATE } from "../constants/game";
+import { GAME_DECK, GAME_STATE, TIME_LIMIT } from "../constants/game";
 
 export function useGameState(initialLevel = 1) {
   const [deckInfo, setDeckInfo] = useState({
@@ -16,18 +16,41 @@ export function useGameState(initialLevel = 1) {
   const [successDeck, setSuccessDeck] = useState(0); // 매칭 성공 덱 개수
   const [gameHistory, setGameHistory] = useState([]); // 게임 히스토리
 
-  // 카드 덱 생성 함수
-  const handleGenerateDeck = useCallback((level) => {
-    const data = buildDeck(level);
-    setDeckInfo({ status: "ready", data, level });
+  const [time, setTime] = useState(TIME_LIMIT[initialLevel] * 1000); // 게임 시간(카운트다운)
+  const animationFrameId = useRef(null); // requestAnimationFrame ref
+  const deadline = useRef(null); // 게임 데드라인 (절대시간)
 
-    setCurrentClickCard([]);
-    setIsChecking(false);
-    setGameState(GAME_STATE.READY);
-    setGameId((id) => id + 1);
-    setSuccessDeck(0);
-    setGameHistory([]);
+  const handleTimer = useCallback(() => {
+    const left_time = deadline.current - performance.now();
+    if (left_time <= 0) {
+      setTime(0);
+      setGameState(GAME_STATE.TIMEOUT);
+      cancelAnimationFrame(animationFrameId.current);
+    } else {
+      setTime(left_time);
+      animationFrameId.current = requestAnimationFrame(handleTimer);
+    }
   }, []);
+
+  // 카드 덱 생성 함수
+  const handleGenerateDeck = useCallback(
+    (level) => {
+      const data = buildDeck(level);
+      setDeckInfo({ status: "ready", data, level });
+
+      setCurrentClickCard([]);
+      setIsChecking(false);
+      setGameState(GAME_STATE.READY);
+      setGameId((id) => id + 1);
+      setSuccessDeck(0);
+      setGameHistory([]);
+
+      cancelAnimationFrame(animationFrameId.current);
+      const new_time = TIME_LIMIT[initialLevel] * 1000;
+      setTime(new_time);
+    },
+    [initialLevel]
+  );
 
   // 카드 덱 초기화
   useEffect(() => {
@@ -37,6 +60,12 @@ export function useGameState(initialLevel = 1) {
   // 카드 클릭 이벤트 함수
   const handleCardClick = (clickedCard) => {
     if (isChecking || clickedCard.isClicked || clickedCard.isMatched) return;
+
+    const fullTime = TIME_LIMIT[deckInfo.level] * 1000;
+    if (time === fullTime) {
+      deadline.current = performance.now() + fullTime;
+      animationFrameId.current = requestAnimationFrame(handleTimer);
+    }
 
     setDeckInfo((prev) => ({
       ...prev,
@@ -66,8 +95,9 @@ export function useGameState(initialLevel = 1) {
         type: GAME_STATE.SUCCESS,
         cards: [card1.value, card2.value],
       };
+      const successCount = successDeck + 1;
       setGameState(GAME_STATE.SUCCESS);
-      setSuccessDeck((prev) => prev + 1);
+      setSuccessDeck(successCount);
       setGameHistory((prev) => [...prev, newLog]);
 
       setTimeout(() => {
@@ -79,7 +109,14 @@ export function useGameState(initialLevel = 1) {
               : card
           ),
         }));
-
+        if (
+          successCount ===
+          (GAME_DECK[deckInfo.level][0] * GAME_DECK[deckInfo.level][1]) / 2
+        ) {
+          setGameState(GAME_STATE.WIN);
+          cancelAnimationFrame(animationFrameId.current);
+          alert("성공: " + time);
+        }
         setCurrentClickCard([]);
         setIsChecking(false);
       }, 300);
@@ -106,12 +143,13 @@ export function useGameState(initialLevel = 1) {
         setIsChecking(false);
       }, 300);
     }
-  }, [currentClickCard, deckInfo.data]);
+  }, [currentClickCard, deckInfo]);
 
   return {
     deckInfo,
     gameId,
     gameState,
+    time,
     successDeck,
     gameHistory,
     handleGenerateDeck,

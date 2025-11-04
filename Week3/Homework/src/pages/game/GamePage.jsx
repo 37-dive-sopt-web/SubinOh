@@ -10,6 +10,7 @@ function GamePage() {
     deckInfo,
     gameId,
     gameState,
+    time,
     successDeck,
     gameHistory,
     handleGenerateDeck,
@@ -35,6 +36,7 @@ function GamePage() {
           <GameProgress
             deckInfo={deckInfo}
             gameState={gameState}
+            time={time}
             successDeck={successDeck}
             history={gameHistory}
           />

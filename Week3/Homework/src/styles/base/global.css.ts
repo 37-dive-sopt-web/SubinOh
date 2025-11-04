@@ -17,6 +17,10 @@ globalStyle("html, body", {
   backgroundColor: themeVars.color.pink[100],
 });
 
+globalStyle("*, *::before, *::after", {
+  boxSizing: "inherit",
+});
+
 /** Scrollbar Hide */
 globalStyle("::-webkit-scrollbar", {
   display: "none",
@@ -29,5 +33,6 @@ export const globalLayout = style({
   alignItems: "center",
   width: "100%",
   height: "100%",
+  padding: "0 2rem",
   ...themeVars.text.body1,
 });

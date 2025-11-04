@@ -6,8 +6,14 @@ import { useGameState } from "../../hooks/useGameState";
 import * as styles from "./GamePage.css";
 
 function GamePage() {
-  const { deckInfo, gameId, handleGenerateDeck, handleCardClick } =
-    useGameState(1);
+  const {
+    deckInfo,
+    gameId,
+    gameState,
+    gameHistory,
+    handleGenerateDeck,
+    handleCardClick,
+  } = useGameState(1);
 
   return (
     <main className={styles.wrapper}>
@@ -25,7 +31,7 @@ function GamePage() {
           )}
         </div>
         <div className={styles.progress}>
-          <GameProgress />
+          <GameProgress gameState={gameState} history={gameHistory} />
         </div>
       </div>
     </main>

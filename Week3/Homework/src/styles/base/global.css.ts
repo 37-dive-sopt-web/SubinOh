@@ -25,7 +25,8 @@ globalStyle("::-webkit-scrollbar", {
 /** default style */
 export const globalLayout = style({
   display: "flex",
-  justifyContent: "center",
+  flexDirection: "column",
+  alignItems: "center",
   width: "100%",
   height: "100%",
   ...themeVars.text.body1,

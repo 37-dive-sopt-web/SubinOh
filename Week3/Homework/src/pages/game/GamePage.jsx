@@ -10,6 +10,7 @@ function GamePage() {
     deckInfo,
     gameId,
     gameState,
+    successDeck,
     gameHistory,
     handleGenerateDeck,
     handleCardClick,
@@ -31,7 +32,12 @@ function GamePage() {
           )}
         </div>
         <div className={styles.progress}>
-          <GameProgress gameState={gameState} history={gameHistory} />
+          <GameProgress
+            deckInfo={deckInfo}
+            gameState={gameState}
+            successDeck={successDeck}
+            history={gameHistory}
+          />
         </div>
       </div>
     </main>

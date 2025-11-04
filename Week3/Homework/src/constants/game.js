@@ -31,7 +31,14 @@ export const GAME_LEVEL = {
 
 // 게임 레벨별 시간
 export const TIME_LIMIT = {
-  [GAME_LEVEL[1]]: 40,
-  [GAME_LEVEL[2]]: 60,
-  [GAME_LEVEL[3]]: 100,
+  1: 40,
+  2: 60,
+  3: 100,
+};
+
+// 게임 레벨별 [행,열] 개수
+export const GAME_DECK = {
+  1: [4, 4],
+  2: [4, 6],
+  3: [6, 6],
 };

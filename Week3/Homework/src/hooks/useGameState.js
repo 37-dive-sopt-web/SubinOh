@@ -13,6 +13,7 @@ export function useGameState(initialLevel = 1) {
   const [gameState, setGameState] = useState(GAME_STATE.READY); // 게임 상태
   const [gameId, setGameId] = useState(1); // 게임 리셋 감지 키
 
+  const [successDeck, setSuccessDeck] = useState(0); // 매칭 성공 덱 개수
   const [gameHistory, setGameHistory] = useState([]); // 게임 히스토리
 
   // 카드 덱 생성 함수
@@ -24,6 +25,7 @@ export function useGameState(initialLevel = 1) {
     setIsChecking(false);
     setGameState(GAME_STATE.READY);
     setGameId((id) => id + 1);
+    setSuccessDeck(0);
     setGameHistory([]);
   }, []);
 
@@ -65,6 +67,7 @@ export function useGameState(initialLevel = 1) {
         cards: [card1.value, card2.value],
       };
       setGameState(GAME_STATE.SUCCESS);
+      setSuccessDeck((prev) => prev + 1);
       setGameHistory((prev) => [...prev, newLog]);
 
       setTimeout(() => {
@@ -109,6 +112,7 @@ export function useGameState(initialLevel = 1) {
     deckInfo,
     gameId,
     gameState,
+    successDeck,
     gameHistory,
     handleGenerateDeck,
     handleCardClick,

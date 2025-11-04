@@ -1,7 +1,9 @@
-import { GameBoard } from "../../components/game/gameBoard/GameBoard";
 import { GameTitle } from "../../components/game/gameTitle/GameTitle";
-import * as styles from "./GamePage.css";
+import { GameBoard } from "../../components/game/gameBoard/GameBoard";
+import { GameProgress } from "../../components/game/gameProgress/GameProgress";
 import { useGameState } from "../../hooks/useGameState";
+
+import * as styles from "./GamePage.css";
 
 function GamePage() {
   const { deckInfo, gameId, handleGenerateDeck, handleCardClick } =
@@ -22,7 +24,9 @@ function GamePage() {
             />
           )}
         </div>
-        <div>실시간 기록</div>
+        <div className={styles.progress}>
+          <GameProgress />
+        </div>
       </div>
     </main>
   );

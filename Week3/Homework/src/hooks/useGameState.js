@@ -1,6 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { buildDeck } from "../utils/buildDeck";
 import { GAME_DECK, GAME_STATE, TIME_LIMIT } from "../constants/game";
+import { useGameTimer } from "./useGameTimer";
+import { getGameLogs, setGameLogs } from "../utils/gameStorage";
 
 export function useGameState(initialLevel = 1) {
   const [deckInfo, setDeckInfo] = useState({
@@ -9,46 +11,38 @@ export function useGameState(initialLevel = 1) {
     level: initialLevel,
   }); // 생성한 카드 덱 정보 (준비상태, 카드데이터, 레벨)
   const [currentClickCard, setCurrentClickCard] = useState([]); // (최근) 클릭된 카드 리스트
-  const [isChecking, setIsChecking] = useState(false); // 매칭되는 상태인지 체크
+  const [isChecking, setIsChecking] = useState(false); // 매칭하고 있는 상태인지 체크
   const [gameState, setGameState] = useState(GAME_STATE.READY); // 게임 상태
   const [gameId, setGameId] = useState(1); // 게임 리셋 감지 키
 
   const [successDeck, setSuccessDeck] = useState(0); // 매칭 성공 덱 개수
   const [gameHistory, setGameHistory] = useState([]); // 게임 히스토리
 
-  const [time, setTime] = useState(TIME_LIMIT[initialLevel] * 1000); // 게임 시간(카운트다운)
+  const [startTime, setStartTime] = useState(null); // 게임 시작 시간
 
-  const animationFrameId = useRef(null); // requestAnimationFrame ref
-  const deadline = useRef(null); // 게임 데드라인 (절대시간)
-
-  const handleTimer = useCallback(() => {
-    const left_time = deadline.current - performance.now();
-    if (left_time <= 0) {
-      setTime(0);
+  const { time, startTimer, stopTimer, resetTimer } = useGameTimer(
+    useCallback(() => {
       setGameState(GAME_STATE.TIMEOUT);
-      cancelAnimationFrame(animationFrameId.current);
-    } else {
-      setTime(left_time);
-      animationFrameId.current = requestAnimationFrame(handleTimer);
-    }
-  }, []);
+    }, [])
+  );
 
   // 카드 덱 생성 함수
-  const handleGenerateDeck = useCallback((level) => {
-    const data = buildDeck(level);
-    setDeckInfo({ status: "ready", data, level });
+  const handleGenerateDeck = useCallback(
+    (level) => {
+      const data = buildDeck(level);
+      setDeckInfo({ status: "ready", data, level });
 
-    setCurrentClickCard([]);
-    setIsChecking(false);
-    setGameState(GAME_STATE.READY);
-    setGameId((id) => id + 1);
-    setSuccessDeck(0);
-    setGameHistory([]);
+      setCurrentClickCard([]);
+      setIsChecking(false);
+      setGameState(GAME_STATE.READY);
+      setGameId((id) => id + 1);
+      setSuccessDeck(0);
+      setGameHistory([]);
 
-    cancelAnimationFrame(animationFrameId.current);
-    const new_time = TIME_LIMIT[level] * 1000;
-    setTime(new_time);
-  }, []);
+      resetTimer(TIME_LIMIT[level] * 1000);
+    },
+    [resetTimer]
+  );
 
   // 카드 덱 초기화
   useEffect(() => {
@@ -61,8 +55,8 @@ export function useGameState(initialLevel = 1) {
 
     const fullTime = TIME_LIMIT[deckInfo.level] * 1000;
     if (time === fullTime) {
-      deadline.current = performance.now() + fullTime;
-      animationFrameId.current = requestAnimationFrame(handleTimer);
+      setStartTime(new Date());
+      startTimer(fullTime);
     }
 
     setDeckInfo((prev) => ({
@@ -107,12 +101,13 @@ export function useGameState(initialLevel = 1) {
               : card
           ),
         }));
+        // 게임 클리어
         if (
           successCount ===
           (GAME_DECK[deckInfo.level][0] * GAME_DECK[deckInfo.level][1]) / 2
         ) {
           setGameState(GAME_STATE.WIN);
-          cancelAnimationFrame(animationFrameId.current);
+          stopTimer();
         }
         setCurrentClickCard([]);
         setIsChecking(false);
@@ -141,6 +136,18 @@ export function useGameState(initialLevel = 1) {
       }, 300);
     }
   }, [currentClickCard, deckInfo]);
+
+  useEffect(() => {
+    if (gameState !== GAME_STATE.WIN) return;
+    const oldLogs = getGameLogs();
+    const newLog = {
+      id: oldLogs.length,
+      level: deckInfo.level,
+      clearTime: TIME_LIMIT[deckInfo.level] * 1000 - time,
+      startTime: startTime,
+    };
+    setGameLogs([...oldLogs, newLog]);
+  }, [gameState, deckInfo.level, time, startTime]);
 
   return {
     deckInfo,

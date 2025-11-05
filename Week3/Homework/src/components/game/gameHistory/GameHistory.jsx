@@ -6,7 +6,7 @@ export function GameHistory({ history }) {
       <div className={styles.title}>최근 히스토리</div>
       <div className={styles.historyList}>
         {history.map((log) => (
-          <div className={styles.historyLog}>
+          <div key={log.id} className={styles.historyLog}>
             <div>
               {log.cards[0]}, {log.cards[1]}
             </div>

@@ -1,3 +1,4 @@
+import { dateFormatter, secFormatter } from "../../../utils/formatter";
 import * as styles from "./RankTable.css";
 
 export function RankTable({ gameLogs }) {
@@ -20,8 +21,10 @@ export function RankTable({ gameLogs }) {
           <tr key={log.id}>
             <td className={styles.bodyRow}>{idx + 1}</td>
             <td className={styles.bodyRow}>Level {log.level}</td>
-            <td className={styles.bodyRow}>{log.clearTime}</td>
-            <td className={styles.bodyRow}>{log.startTime}</td>
+            <td className={styles.bodyRow}>{secFormatter(log.clearTime)}</td>
+            <td className={styles.bodyRow}>
+              {dateFormatter.format(new Date(log.startTime))}
+            </td>
           </tr>
         ))}
       </tbody>

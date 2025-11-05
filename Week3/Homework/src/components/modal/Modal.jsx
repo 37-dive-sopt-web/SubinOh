@@ -1,10 +1,10 @@
 import { createPortal } from "react-dom";
 import * as styles from "./Modal.css";
 import { GAME_STATE } from "../../constants/game";
+import { secFormatter } from "../../utils/formatter";
 
 export function Modal({ gameState, level, resultTime, modalCountdown }) {
   const modalRoot = document.querySelector("#modal");
-  const formattedTime = (resultTime / 1000).toFixed(2);
 
   return createPortal(
     <div className={styles.overlay}>
@@ -14,7 +14,9 @@ export function Modal({ gameState, level, resultTime, modalCountdown }) {
         </div>
         <div className={styles.content}>
           {gameState === GAME_STATE.WIN
-            ? `Level ${level} 을 ${formattedTime}초 만에 클리어했어요🤩`
+            ? `Level ${level} 을 ${secFormatter(
+                resultTime
+              )}초 만에 클리어했어요🤩`
             : `Level ${level} 도전에 실패했어요😥`}
         </div>
         <div

@@ -1,7 +1,7 @@
-import { GameSelect } from "../gameSelect/GameSelect";
-import { GameState } from "../gameState/GameState";
-import { GameMessage } from "../gameMessage/gameMessage";
-import { GameHistory } from "../gameHistory/GameHistory";
+import { GameSelect } from "./gameSelect/GameSelect";
+import { GameState } from "./gameState/GameState";
+import { GameMessage } from "./gameMessage/GameMessage";
+import { GameHistory } from "./gameHistory/GameHistory";
 import * as styles from "./GameProgress.css";
 
 export function GameProgress({

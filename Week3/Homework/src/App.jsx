@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Header } from "./components/Header/Header.jsx";
+import { Header } from "./components/header/Header.jsx";
 import { globalLayout } from "./styles/base/global.css.ts";
 import GamePage from "./pages/game/GamePage.jsx";
 import { RankPage } from "./pages/rank/RankPage.jsx";

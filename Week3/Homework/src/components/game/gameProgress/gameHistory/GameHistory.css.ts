@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
-import { themeVars } from "../../../styles/base/theme.css";
+import { themeVars } from "../../../../styles/base/theme.css";
 import { recipe } from "@vanilla-extract/recipes";
-import { screen } from "../../../styles/token/screen";
+import { screen } from "../../../../styles/token/screen";
 
 export const history = style({
   display: "flex",

@@ -1,4 +1,4 @@
-import { GameCard } from "../gameCard/GameCard";
+import { GameCard } from "./gameCard/GameCard";
 
 import * as styles from "./GameBoard.css";
 

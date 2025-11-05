@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
-import { themeVars } from "../../../styles/base/theme.css";
-import { screen } from "../../../styles/token/screen";
+import { themeVars } from "../../../../styles/base/theme.css";
+import { screen } from "../../../../styles/token/screen";
 
 export const message = style({
   display: "flex",

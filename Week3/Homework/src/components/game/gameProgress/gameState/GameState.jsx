@@ -1,5 +1,5 @@
-import { GAME_DECK } from "../../../constants/game";
-import { secFormatter } from "../../../utils/formatter";
+import { GAME_DECK } from "../../../../constants/game";
+import { secFormatter } from "../../../../utils/formatter";
 import * as styles from "./GameState.css";
 
 export function GameState({ time, deckInfo, successDeck }) {

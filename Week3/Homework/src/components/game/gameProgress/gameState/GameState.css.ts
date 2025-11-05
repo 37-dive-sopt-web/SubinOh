@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { themeVars } from "../../../styles/base/theme.css";
+import { themeVars } from "../../../../styles/base/theme.css";
 
 export const stateGroup = style({
   display: "grid",

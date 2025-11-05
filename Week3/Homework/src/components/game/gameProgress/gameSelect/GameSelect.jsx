@@ -1,4 +1,4 @@
-import { GAME_LEVEL } from "../../../constants/game";
+import { GAME_LEVEL } from "../../../../constants/game";
 import * as styles from "./GameSelect.css";
 
 export function GameSelect({ level, onLevelChange }) {

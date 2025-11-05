@@ -1,4 +1,4 @@
-import { GUIDE_MESSAGES } from "../../../constants/game";
+import { GUIDE_MESSAGES } from "../../../../constants/game";
 import * as styles from "./GameMessage.css";
 
 export function GameMessage({ gameState }) {

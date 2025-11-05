@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { themeVars } from "../../../styles/base/theme.css";
-import { screen } from "../../../styles/token/screen";
+import { themeVars } from "../../../../styles/base/theme.css";
+import { screen } from "../../../../styles/token/screen";
 
 const cardFace = style({
   display: "flex",

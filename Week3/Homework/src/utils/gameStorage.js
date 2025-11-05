@@ -2,7 +2,13 @@ export const LOCAL_STORAGE_KEY = "gameLog";
 
 // 클리어 시간이 짧은 순서대로 정렬
 function sortedLogs(gameLogs) {
-  const sorted = gameLogs.sort((a, b) => a.clearTime - b.clearTime);
+  const sorted = gameLogs.sort((a, b) => {
+    if (a.level < b.level) return 1;
+    else if (a.level === b.level) {
+      return a.clearTime - b.clearTime;
+    }
+    return -1;
+  });
   return sorted;
 }
 

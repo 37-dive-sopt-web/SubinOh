@@ -1,11 +1,15 @@
 import { style } from "@vanilla-extract/css";
 import { themeVars } from "../../../styles/base/theme.css";
 import { recipe } from "@vanilla-extract/recipes";
+import { screen } from "../../../styles/token/screen";
 
 export const history = style({
   display: "flex",
   flexDirection: "column",
   gap: "1.3rem",
+  ...screen.md({
+    display: "none",
+  }),
 });
 
 export const title = style({

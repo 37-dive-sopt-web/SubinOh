@@ -31,7 +31,7 @@ function GamePage() {
     <main className={styles.wrapper}>
       <div className={styles.layout}>
         <div className={styles.board}>
-          {/** 게임 보드 헤더(타이트) */}
+          {/** 게임 보드 헤더(타이틀) */}
           <GameTitle onReset={() => handleGenerateDeck(deckInfo.level)} />
           {/** 게임 보드판 */}
           {deckInfo.data !== null && (
@@ -43,6 +43,7 @@ function GamePage() {
           )}
         </div>
         <div className={styles.progress}>
+          {/** 게임 진행상황 */}
           <GameProgress
             onLevelChange={handleGenerateDeck}
             deckInfo={deckInfo}

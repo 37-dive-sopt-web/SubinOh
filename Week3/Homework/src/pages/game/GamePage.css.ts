@@ -1,6 +1,7 @@
 import { style } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/base/theme.css";
 
+import { screen } from "../../styles/token/screen";
 export const wrapper = style({
   display: "flex",
   width: "100%",
@@ -16,6 +17,10 @@ export const layout = style({
   gridTemplateColumns: "2fr 1fr",
   gap: "3rem",
   width: "100%",
+  ...screen.md({
+    display: "flex",
+    flexDirection: "column-reverse",
+  }),
 });
 
 export const board = style({

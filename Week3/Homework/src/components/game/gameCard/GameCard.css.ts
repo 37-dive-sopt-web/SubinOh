@@ -1,6 +1,7 @@
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeVars } from "../../../styles/base/theme.css";
+import { screen } from "../../../styles/token/screen";
 
 const cardFace = style({
   display: "flex",
@@ -64,7 +65,14 @@ export const wrapper = recipe({
 
   variants: {
     level: {
-      2: { width: "8rem", height: "8rem" },
+      2: {
+        width: "8rem",
+        height: "8rem",
+        ...screen.md({
+          width: "6rem",
+          height: "6rem",
+        }),
+      },
       3: { width: "6rem", height: "6rem" },
     },
     isFlipped: {

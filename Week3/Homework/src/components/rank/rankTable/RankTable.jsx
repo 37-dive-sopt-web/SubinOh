@@ -7,27 +7,29 @@ export function RankTable({ gameLogs }) {
   }
 
   return (
-    <table>
-      <thead className={styles.head}>
-        <tr>
-          <th className={styles.headRow}>순위</th>
-          <th className={styles.headRow}>레벨</th>
-          <th className={styles.headRow}>클리어 시간(초)</th>
-          <th className={styles.headRow}>기록 시작</th>
-        </tr>
-      </thead>
-      <tbody>
-        {gameLogs.map((log, idx) => (
-          <tr key={log.id}>
-            <td className={styles.bodyRow}>{idx + 1}</td>
-            <td className={styles.bodyRow}>Level {log.level}</td>
-            <td className={styles.bodyRow}>{secFormatter(log.clearTime)}</td>
-            <td className={styles.bodyRow}>
-              {dateFormatter.format(new Date(log.startTime))}
-            </td>
+    <div className={styles.wrapper}>
+      <table className={styles.table}>
+        <thead className={styles.head}>
+          <tr>
+            <th className={styles.headRow}>순위</th>
+            <th className={styles.headRow}>레벨</th>
+            <th className={styles.headRow}>클리어 시간(초)</th>
+            <th className={styles.headRow}>기록 시작</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {gameLogs.map((log, idx) => (
+            <tr key={log.id}>
+              <td className={styles.bodyRow}>{idx + 1}</td>
+              <td className={styles.bodyRow}>Level {log.level}</td>
+              <td className={styles.bodyRow}>{secFormatter(log.clearTime)}</td>
+              <td className={styles.bodyRow}>
+                {dateFormatter.format(new Date(log.startTime))}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

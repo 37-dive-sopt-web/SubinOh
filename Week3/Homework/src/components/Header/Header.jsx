@@ -9,7 +9,7 @@ export function Header({ tab, setTab }) {
 
   return (
     <header className={styles.wrapper}>
-      <h1>숫자 카드 짝 맞추기</h1>
+      <h1 className={styles.title}>숫자 카드 짝 맞추기</h1>
       <div className={styles.buttonWrapper}>
         <button
           className={styles.button({ selected: tab === "game" })}

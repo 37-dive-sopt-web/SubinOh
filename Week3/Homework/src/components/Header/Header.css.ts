@@ -1,6 +1,7 @@
 import { themeVars } from "../../styles/base/theme.css";
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
+import { screen } from "../../styles/token/screen";
 
 export const wrapper = style({
   display: "flex",
@@ -12,6 +13,17 @@ export const wrapper = style({
   margin: "2rem 1rem",
   borderRadius: "1rem",
   backgroundColor: themeVars.color.white[700],
+  ...screen.sm({
+    flexDirection: "column",
+    alignItems: "flex-start",
+    padding: "2rem",
+  }),
+});
+
+export const title = style({
+  ...screen.sm({
+    fontSize: "2rem",
+  }),
 });
 
 export const buttonWrapper = style({

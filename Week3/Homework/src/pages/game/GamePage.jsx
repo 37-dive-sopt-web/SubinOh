@@ -7,7 +7,6 @@ import * as styles from "./GamePage.css";
 import { Modal } from "../../components/modal/Modal";
 import { TIME_LIMIT } from "../../constants/game";
 import { useGameModal } from "../../hooks/useGameModal";
-import { useCallback } from "react";
 
 function GamePage() {
   const {
@@ -21,11 +20,11 @@ function GamePage() {
     handleCardClick,
   } = useGameState(1);
 
-  const onResetGame = useCallback(() => {
-    handleGenerateDeck(deckInfo.level);
-  }, [handleGenerateDeck, deckInfo.level]);
-
-  const { isOpen, countdown } = useGameModal(gameState, onResetGame);
+  const { isOpen, countdown } = useGameModal(
+    deckInfo.level,
+    gameState,
+    handleGenerateDeck
+  );
   const resultTime = TIME_LIMIT[deckInfo.level] * 1000 - time; // (게임 클리어 시) 남은 게임 시간
 
   return (

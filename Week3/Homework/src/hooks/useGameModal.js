@@ -3,7 +3,7 @@ import { GAME_STATE } from "../constants/game";
 
 const MODAL_COUNTDOWN_SEC = 3;
 
-export function useGameModal(gameState, onResetGame) {
+export function useGameModal(level, gameState, onResetGame) {
   const [isOpen, setIsOpen] = useState(false);
   const [countdown, setCountdown] = useState(MODAL_COUNTDOWN_SEC);
 
@@ -11,13 +11,12 @@ export function useGameModal(gameState, onResetGame) {
     if (gameState === GAME_STATE.WIN || gameState === GAME_STATE.TIMEOUT) {
       setIsOpen(true);
       setCountdown(MODAL_COUNTDOWN_SEC);
-
       const handleCountDown = setInterval(() => {
         setCountdown((prev) => {
           if (prev < 1) {
             clearInterval(handleCountDown);
             setIsOpen(false);
-            onResetGame();
+            onResetGame(level);
             return 0;
           } else {
             return prev - 1;
@@ -27,6 +26,6 @@ export function useGameModal(gameState, onResetGame) {
 
       return () => clearInterval(handleCountDown);
     }
-  }, [gameState, onResetGame]);
+  }, [level, gameState, onResetGame]);
   return { isOpen, countdown };
 }

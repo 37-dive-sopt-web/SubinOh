@@ -48,7 +48,7 @@ function GamePage() {
             deckInfo={deckInfo}
             gameState={gameState}
             time={time}
-            successDeck={successDeck}
+            successDeck={successDeck.size}
             history={gameHistory}
           />
         </div>

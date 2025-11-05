@@ -15,7 +15,7 @@ export function useGameState(initialLevel = 1) {
   const [gameState, setGameState] = useState(GAME_STATE.READY); // 게임 상태
   const [gameId, setGameId] = useState(1); // 게임 리셋 감지 키
 
-  const [successDeck, setSuccessDeck] = useState(0); // 매칭 성공 덱 개수
+  const [successDeck, setSuccessDeck] = useState(new Set()); // 매칭 성공 덱 Set
   const [gameHistory, setGameHistory] = useState([]); // 게임 히스토리
 
   const [startTime, setStartTime] = useState(null); // 게임 시작 시간
@@ -26,7 +26,13 @@ export function useGameState(initialLevel = 1) {
     }, [])
   );
 
-  // 카드 덱 생성 함수
+  /**
+   * @description
+   * - 새로운 카드덱을 생성하는 함수
+   * - 게임 관련 상태를 모두 초기화합니다. 타이머는 현재 레벨 값에 맞춰 시간을 리셋합니다.
+   * @params {number} level
+   * - 현재 level 값(1,2,3)에 따라 카드 덱 생성
+   */
   const handleGenerateDeck = useCallback(
     (level) => {
       const data = buildDeck(level);
@@ -36,7 +42,7 @@ export function useGameState(initialLevel = 1) {
       setIsChecking(false);
       setGameState(GAME_STATE.READY);
       setGameId((id) => id + 1);
-      setSuccessDeck(0);
+      setSuccessDeck(new Set());
       setGameHistory([]);
 
       resetTimer(TIME_LIMIT[level] * 1000);
@@ -44,27 +50,46 @@ export function useGameState(initialLevel = 1) {
     [resetTimer]
   );
 
-  // 카드 덱 초기화
+  /**
+   * @decription
+   * - 레벨이 변경되거나 게임이 리셋되면, handleGenerateDeck() 실행 (새로운 카드덱 생성)
+   */
   useEffect(() => {
     handleGenerateDeck(deckInfo.level);
   }, [deckInfo.level, handleGenerateDeck]);
 
-  // 카드 클릭 이벤트 함수
+  /**
+   * @description
+   * - 카드 클릭 시, 카드 상태(isClicked)를 변경하는 함수.
+   * - 게임 첫 번째로 카드가 클릭된 경우, 타이머를 시작합니다.
+   * @param {card} clickedCard
+   * @returns
+   */
   const handleCardClick = (clickedCard) => {
-    if (isChecking || clickedCard.isClicked || clickedCard.isMatched) return;
+    if (
+      isChecking ||
+      clickedCard.isClicked ||
+      clickedCard.isMatched ||
+      deckInfo.status !== "ready"
+    )
+      return;
 
+    // 타이머 시작
     const fullTime = TIME_LIMIT[deckInfo.level] * 1000;
     if (time === fullTime) {
       setStartTime(new Date());
       startTimer(fullTime);
     }
 
+    // 클릭된 카드 상태 변경
     setDeckInfo((prev) => ({
       ...prev,
       data: prev.data.map((card) =>
         card.id === clickedCard.id ? { ...card, isClicked: true } : card
       ),
     }));
+
+    // 선택된 카드가 현재 1개일 경우, GAME_STATE >> INCOMPLETE 로 변경
     setCurrentClickCard((prev) => {
       const newClicks = [...prev, clickedCard];
       if (newClicks.length === 1) {
@@ -74,25 +99,47 @@ export function useGameState(initialLevel = 1) {
     });
   };
 
-  // 카드 값 동일 여부 체크 함수
+  /**
+   * @description
+   * - 카드 매칭로직에서의 공통로직을 처리하는 함수
+   * - 전달받은 action 함수를 실행한 후, 공통로직 실행
+   * @param {Function} action
+   */
+  const runActions = (action) => {
+    setTimeout(() => {
+      action();
+      setCurrentClickCard([]);
+      setIsChecking(false);
+    }, 300);
+  };
+
+  /**
+   * @description
+   * - 카드 2개의 값(value)이 일치하는지 여부를 체크하는 로직
+   * - 매칭 성공/실패와 상관없이 매칭 로그(gameHistory) 업데이트
+   * 1-1. 성공 : GAME_STATE > SUCCESS 변경, 카드 상태(isMatched) 변경
+   * 1-2. 성공(게임 클리어) : GAME_STATE > WIN 변경, ..., 타이머 중지
+   * 2-1. 실패 : GAME_STATE > FAIL 변경, 카드 상태(isClicked) 변경
+   */
   useEffect(() => {
     if (currentClickCard.length !== 2) return;
 
     setIsChecking(true);
     const [card1, card2] = currentClickCard;
+    const isMatch = card1.value === card2.value;
 
-    if (card1.value === card2.value) {
-      const newLog = {
-        id: new Date(),
-        type: GAME_STATE.SUCCESS,
-        cards: [card1.value, card2.value],
-      };
-      const successCount = successDeck + 1;
+    const newLog = {
+      id: new Date().toISOString() + Math.random(),
+      type: isMatch ? GAME_STATE.SUCCESS : GAME_STATE.FAIL,
+      cards: [card1.value, card2.value],
+    };
+    setGameHistory((prev) => [...prev, newLog]);
+
+    if (isMatch) {
+      // ------ 매칭 성공 로직
       setGameState(GAME_STATE.SUCCESS);
-      setSuccessDeck(successCount);
-      setGameHistory((prev) => [...prev, newLog]);
 
-      setTimeout(() => {
+      const successAction = () => {
         setDeckInfo((prev) => ({
           ...prev,
           data: prev.data.map((card) =>
@@ -101,7 +148,15 @@ export function useGameState(initialLevel = 1) {
               : card
           ),
         }));
-        // 게임 클리어
+
+        setSuccessDeck((prev) => {
+          const newSet = new Set(prev);
+          newSet.add(card1.value);
+          return newSet;
+        });
+
+        const successCount = successDeck.size + 1;
+        // 매칭이 모두 성공하여 게임을 클리어한 경우
         if (
           successCount ===
           (GAME_DECK[deckInfo.level][0] * GAME_DECK[deckInfo.level][1]) / 2
@@ -109,19 +164,13 @@ export function useGameState(initialLevel = 1) {
           setGameState(GAME_STATE.WIN);
           stopTimer();
         }
-        setCurrentClickCard([]);
-        setIsChecking(false);
-      }, 300);
-    } else {
-      const newLog = {
-        id: new Date(),
-        type: GAME_STATE.FAIL,
-        cards: [card1.value, card2.value],
       };
+      runActions(successAction);
+    } else {
+      // ------ 매칭 실패 로직
       setGameState(GAME_STATE.FAIL);
-      setGameHistory((prev) => [...prev, newLog]);
 
-      setTimeout(() => {
+      const failAction = () => {
         setDeckInfo((prev) => ({
           ...prev,
           data: prev.data.map((card) =>
@@ -130,13 +179,15 @@ export function useGameState(initialLevel = 1) {
               : card
           ),
         }));
-
-        setCurrentClickCard([]);
-        setIsChecking(false);
-      }, 300);
+      };
+      runActions(failAction);
     }
-  }, [currentClickCard, deckInfo]);
+  }, [currentClickCard, deckInfo.level, successDeck.size, stopTimer]);
 
+  /**
+   * @description
+   * - 게임이 클리어되었을 때, 로컬스토리지에 성공 로그를 저장하는 로직
+   */
   useEffect(() => {
     if (gameState !== GAME_STATE.WIN) return;
     const oldLogs = getGameLogs();

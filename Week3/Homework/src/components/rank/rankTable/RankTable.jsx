@@ -1,8 +1,12 @@
 import * as styles from "./RankTable.css";
 
-export function RankTable() {
+export function RankTable({ gameLogs }) {
+  if (gameLogs.length === 0) {
+    return <div className={styles.message}>게임 기록이 없습니다</div>;
+  }
+
   return (
-    <table className={styles.table}>
+    <table>
       <thead className={styles.head}>
         <tr>
           <th className={styles.headRow}>순위</th>
@@ -11,7 +15,16 @@ export function RankTable() {
           <th className={styles.headRow}>기록 시작</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody>
+        {gameLogs.map((log, idx) => (
+          <tr key={log.id}>
+            <td className={styles.bodyRow}>{idx + 1}</td>
+            <td className={styles.bodyRow}>Level {log.level}</td>
+            <td className={styles.bodyRow}>{log.clearTime}</td>
+            <td className={styles.bodyRow}>{log.startTime}</td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   );
 }

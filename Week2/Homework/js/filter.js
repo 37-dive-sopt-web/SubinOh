@@ -29,7 +29,7 @@ function filterMembers() {
       return member_value.includes(filter_value);
     });
   });
-  tbody.innerHTML = "";
+  tbody.textContent = "";
   const fragment = new DocumentFragment();
 
   new_members.forEach((member) => {

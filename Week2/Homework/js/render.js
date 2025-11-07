@@ -46,7 +46,7 @@ function renderMembers(member) {
  * 전체 멤버 렌더링 함수
  */
 function renderAllMembers() {
-  tbody.innerHTML = "";
+  tbody.textContent = "";
 
   const members = getMembers();
   const fragment = new DocumentFragment();

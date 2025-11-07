@@ -45,13 +45,9 @@ submit_btn.addEventListener("click", filterMembers);
 
 // (3) 필터링 초기화 버튼 함수
 function resetFilter() {
-  filterInputs.name.value = "";
-  filterInputs.englishName.value = "";
-  filterInputs.github.value = "";
-  filterInputs.gender.value = "";
-  filterInputs.role.value = "";
-  filterInputs.codeReviewGroup.value = "";
-  filterInputs.age.value = "";
+  for (let key in filterInputs) {
+    filterInputs[key].value = "";
+  }
 
   renderAllMembers();
 }

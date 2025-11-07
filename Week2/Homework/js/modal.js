@@ -30,7 +30,7 @@ const modalAddBtn = document.querySelector(".btn-modal-add");
 
 // (1) 모달 데이터 초기화 함수
 function clearModal() {
-  Object.keys(ModalInputs).map((key) => {
+  Object.keys(ModalInputs).forEach((key) => {
     ModalInputs[key].value = "";
   });
 }

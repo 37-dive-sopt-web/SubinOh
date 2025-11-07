@@ -28,7 +28,14 @@ function deleteMembers() {
     alert("선택된 멤버가 없습니다.");
     return;
   }
-  if (!confirm("선택된 멤버를 삭제하시겠습니까?")) return;
+  if (!confirm(`선택된 ${check_members.length}명의 멤버를 삭제하시겠습니까?`)) {
+    // 삭제 철회 시, 선택된 멤버의 체크박스 초기화
+    check_members.forEach((member) => (member.checked = false));
+    if (checkAll) {
+      checkAll.checked = false;
+    }
+    return;
+  }
 
   // 선택된 멤버ID 배열
   const check_ids = new Set(
@@ -40,5 +47,10 @@ function deleteMembers() {
   // 새로운 멤버목록 업데이트
   setMembers(new_members);
   renderAllMembers();
+
+  // 전체 체크상태를 false로 변경
+  if (checkAll) {
+    checkAll.checked = false;
+  }
 }
 deleteBtn.addEventListener("click", deleteMembers);

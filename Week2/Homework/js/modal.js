@@ -49,7 +49,7 @@ modal.addEventListener("click", (event) => {
 // (4) 모달 유효성 검사 함수
 function validateModal() {
   for (const key of Object.keys(ModalInputs)) {
-    if (ModalInputs[key].value == "") {
+    if (ModalInputs[key].value.trim() == "") {
       alert("모든 항목이 입력되어야 합니다.");
       return false;
     }

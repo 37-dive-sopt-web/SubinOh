@@ -23,7 +23,7 @@ function filterMembers() {
 
   const new_members = members.filter((member) => {
     return Object.keys(filterInputs).every((key) => {
-      const filter_value = String(filterInputs[key].value).toLowerCase();
+      const filter_value = String(filterInputs[key].value.trim()).toLowerCase();
       const member_value = String(member[key]).toLowerCase();
 
       return member_value.includes(filter_value);

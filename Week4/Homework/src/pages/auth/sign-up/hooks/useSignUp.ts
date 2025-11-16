@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import type { SignUpForm } from "../../../../types/signup";
+import type { SignUpForm, SignUpReq } from "../../../../types/signup";
+import { useMutation } from "@tanstack/react-query";
+import { signupMutationOptions } from "../../../../apis/mutations/signup";
 
 const INITIAL_FORM_DATA: SignUpForm = {
   id: "",
@@ -13,6 +15,7 @@ const INITIAL_FORM_DATA: SignUpForm = {
 
 export function useSignUp() {
   const navigate = useNavigate();
+  const { mutate: signupMutate } = useMutation(signupMutationOptions.signup);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<SignUpForm>(INITIAL_FORM_DATA);
 
@@ -40,9 +43,23 @@ export function useSignUp() {
   };
 
   // 4. 회원가입 폼 제출
-  const handleSubmit = () => {
-    console.log(formData); //(임시)
-    navigate("/login", { replace: true });
+  const handleSubmit = async () => {
+    const data: SignUpReq = {
+      username: formData.id,
+      password: formData.password,
+      name: formData.name,
+      email: formData.email,
+      age: Number(formData.age),
+    };
+    signupMutate(data, {
+      onSuccess: () => {
+        alert(`${formData.id}님, 회원가입이 완료되었습니다`);
+        navigate("/login", { replace: true });
+      },
+      onError: (err) => {
+        alert(err.message);
+      },
+    });
   };
 
   return {

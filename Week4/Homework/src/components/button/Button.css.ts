@@ -43,11 +43,10 @@ export const buttonVariants = styleVariants({
   default: [
     base,
     {
-      backgroundColor: themeVars.color.pink[600],
-      color: themeVars.color.white[700],
+      border: `1px solid gray`,
       selectors: {
         "&:hover:not(:disabled)": {
-          backgroundColor: themeVars.color.pink[500],
+          opacity: "0.9",
         },
       },
     },

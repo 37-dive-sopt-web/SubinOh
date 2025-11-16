@@ -1,24 +1,57 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 
 import * as styles from "./Login.css";
 import { InputBox } from "../../../components/input-box/InputBox";
 import { Button } from "../../../components/button/Button";
-import type { LoginForm } from "../../../types/login";
+import type { LoginForm, LoginRes } from "../../../types/login";
+import { useMutation } from "@tanstack/react-query";
+import { loginMutationOptions } from "../../../apis/mutations/login";
+import { setUserId } from "../../../utils/auth-storage";
 
 export function Login() {
+  const navigate = useNavigate();
+  const { mutate: loginMutate } = useMutation(loginMutationOptions.login);
+
   const [formData, setFormData] = useState<LoginForm>({
     id: "",
     password: "",
-  });
-  const [error] = useState(false);
+  }); // 로그인 데이터
+  const [error, setError] = useState(""); // 로그인 에러 메시지
 
+  /**
+   * @description
+   * - 입력 이벤트 핸들링
+   * @param e
+   */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+  };
+
+  /**
+   * @description
+   * - 로그인 API
+   * - 서버응답값(userId) sessionStorage 저장
+   */
+  const handleSubmit = async () => {
+    const data = {
+      username: formData.id,
+      password: formData.password,
+    };
+    loginMutate(data, {
+      onSuccess: (res: LoginRes) => {
+        setUserId(res.data.userId);
+        navigate("/mypage");
+      },
+      onError: (err) => {
+        console.log("로그인 실패:", err);
+        setError(err.message);
+      },
+    });
   };
 
   return (
@@ -43,11 +76,12 @@ export function Login() {
           value={formData.password}
           onChange={handleChange}
         />
-        {error && <div className={styles.error}>임시 에러 메시지</div>}
+        {error !== "" && <div className={styles.error}>{error}</div>}
         <div className={styles.group}>
           <Button
             variant="primary"
             disabled={formData.id == "" || formData.password == ""}
+            onClick={handleSubmit}
           >
             로그인
           </Button>

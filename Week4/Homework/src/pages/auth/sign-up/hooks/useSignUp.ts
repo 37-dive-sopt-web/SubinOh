@@ -1,16 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import type { SignUpForm } from "../../../../types/signup";
 
-type FormData = {
-  id: string;
-  password: string;
-  passwordConfirm: string;
-  name: string;
-  email: string;
-  age: string;
-};
-
-const INITIAL_FORM_DATA: FormData = {
+const INITIAL_FORM_DATA: SignUpForm = {
   id: "",
   password: "",
   passwordConfirm: "",
@@ -22,7 +14,7 @@ const INITIAL_FORM_DATA: FormData = {
 export function useSignUp() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState<FormData>(INITIAL_FORM_DATA);
+  const [formData, setFormData] = useState<SignUpForm>(INITIAL_FORM_DATA);
 
   // 1. 이벤트 핸들링 함수
   const handleChangeFormData = (e: React.ChangeEvent<HTMLInputElement>) => {

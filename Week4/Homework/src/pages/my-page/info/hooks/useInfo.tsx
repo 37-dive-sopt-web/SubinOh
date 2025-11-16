@@ -1,14 +1,8 @@
 import { useState } from "react";
-
-type UserData = {
-  id: string;
-  name: string;
-  email: string;
-  age: string;
-};
+import type { User } from "../../../../types/user";
 
 export function useInfo() {
-  const [userData, setUserData] = useState<UserData>({
+  const [userData, setUserData] = useState<User>({
     id: "",
     name: "",
     email: "",

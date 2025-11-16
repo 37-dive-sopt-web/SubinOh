@@ -4,9 +4,10 @@ import { useState } from "react";
 import * as styles from "./Login.css";
 import { InputBox } from "../../../components/input-box/InputBox";
 import { Button } from "../../../components/button/Button";
+import type { LoginForm } from "../../../types/login";
 
 export function Login() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<LoginForm>({
     id: "",
     password: "",
   });

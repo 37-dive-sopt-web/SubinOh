@@ -48,6 +48,7 @@ export function Login() {
         navigate("/mypage");
       },
       onError: (err) => {
+        console.log(data);
         console.log("로그인 실패:", err);
         setError(err.message);
       },

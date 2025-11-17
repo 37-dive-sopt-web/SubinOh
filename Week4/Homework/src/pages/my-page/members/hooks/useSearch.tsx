@@ -1,25 +1,31 @@
-import { useState } from "react";
-import type { SearchUser } from "../../../../types/user";
+import { useCallback, useState } from "react";
+import { userQueryOptions } from "../../../../apis/queries/user";
+import { useQuery } from "@tanstack/react-query";
+import type { UserInfo } from "../../../../types/user";
 
 export function useSearch() {
   const [userId, setUserId] = useState<number | null>(null);
-  const [userInfo, setUserInfo] = useState<SearchUser | null>(null);
+  const [userInfo, setUserInfo] = useState<UserInfo>();
+  const { refetch, isError } = useQuery({
+    ...userQueryOptions.getUser(userId ?? 0),
+    enabled: false,
+    retry: 0,
+  });
+  const [error, setError] = useState("");
 
-  const handleUserId = (id: number) => {
-    setUserId(Number(id));
+  const handleUserId = useCallback((id: number) => {
+    setUserId(id);
+  }, []);
+
+  const handleSearch = async () => {
+    if (userId) {
+      const result = await refetch();
+      setUserInfo(result.data);
+      if (result.error) {
+        setError(result.error.message);
+      }
+    }
   };
 
-  const handleSearch = () => {
-    console.log("검색 성공");
-    setUserInfo({
-      id: 0,
-      username: "",
-      name: "",
-      email: "",
-      age: 0,
-      status: "ACTIVE",
-    });
-  };
-
-  return { userId, handleUserId, handleSearch, userInfo };
+  return { userId, handleUserId, handleSearch, userInfo, isError, error };
 }

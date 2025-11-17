@@ -4,7 +4,7 @@ export const ENDPOINTS = {
   // 회원가입
   USER_SIGNUP: "api/v1/users",
   // 개인정보 수정
-  MODIFY_USER_IFNO: (id: number) => `api/v1/users/${id}`,
+  MODIFY_USER_INFO: (id: number) => `api/v1/users/${id}`,
   // 회원정보 조회
   SEARCH_USER: (id: number) => `api/v1/users/${id}`,
   // 회원 탈퇴

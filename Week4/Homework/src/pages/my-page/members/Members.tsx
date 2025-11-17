@@ -5,7 +5,8 @@ import { Result } from "./components/result-member/Result";
 import { useSearch } from "./hooks/useSearch";
 
 export function Members() {
-  const { userId, handleUserId, handleSearch, userInfo } = useSearch();
+  const { userId, handleUserId, handleSearch, userInfo, isError, error } =
+    useSearch();
 
   return (
     <div className={styles.container}>
@@ -24,7 +25,11 @@ export function Members() {
           확인
         </Button>
       </div>
-      {userInfo !== null && <Result userInfo={userInfo} />}
+      {userInfo ? (
+        <Result userInfo={userInfo} />
+      ) : (
+        isError && <span className={styles.error}>{error}</span>
+      )}
     </div>
   );
 }

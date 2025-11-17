@@ -1,7 +1,7 @@
 import { useState } from "react";
-import type { User } from "../../../../types/user";
+import type { UpdateUserReq, User } from "../../../../types/user";
 
-export function useInfo() {
+export function useInfo(modifyMutate: (data: UpdateUserReq) => void) {
   const [userData, setUserData] = useState<User>({
     id: "",
     name: "",
@@ -20,14 +20,12 @@ export function useInfo() {
 
   // 2. 유저 데이터 수정 함수
   const handleSubmit = () => {
-    console.log(userData);
-    const result = true;
-    if (result) {
-      alert("정보가 저장되었어요");
-    } else {
-      alert("수정 실패");
-    }
+    modifyMutate({
+      name: userData.name,
+      email: userData.email,
+      age: Number(userData.age),
+    });
   };
 
-  return { userData, handleChangeUserData, handleSubmit };
+  return { userData, setUserData, handleChangeUserData, handleSubmit };
 }

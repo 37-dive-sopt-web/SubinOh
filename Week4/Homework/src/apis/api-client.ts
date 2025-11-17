@@ -4,6 +4,7 @@ const http = ky.create({
   prefixUrl: `${import.meta.env.VITE_API_KEY}`,
   credentials: "include",
   timeout: 10000,
+  retry: 0,
   headers: {
     "Content-Type": "application/json",
   },
@@ -15,6 +16,7 @@ const http = ky.create({
           const message = await response.text();
           error = JSON.parse(message);
         }
+        console.log("부모 에러다: ", error);
         return error;
       },
     ],

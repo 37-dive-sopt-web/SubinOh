@@ -1,16 +1,10 @@
+import type { UserInfo } from "../../../../../types/user";
 import * as styles from "./Result.css";
-export function Result({
-  userInfo,
-}: {
-  userInfo: {
-    id: number;
-    username: string;
-    name: string;
-    email: string;
-    age: number;
-    status: string;
-  };
-}) {
+interface ResultProps {
+  userInfo: UserInfo;
+}
+
+export function Result({ userInfo }: ResultProps) {
   return (
     <div className={styles.container}>
       <div className={styles.row}>

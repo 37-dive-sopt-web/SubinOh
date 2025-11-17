@@ -2,7 +2,13 @@ import { createPortal } from "react-dom";
 import * as styles from "./Modal.css";
 import { Button } from "../../../../../components/button/Button";
 
-export function Modal({ isClose }: { isClose: () => void }) {
+export function Modal({
+  isClose,
+  withdraw,
+}: {
+  isClose: () => void;
+  withdraw: () => void;
+}) {
   const modalRoot = document.querySelector("#modal");
 
   if (!modalRoot) {
@@ -20,7 +26,9 @@ export function Modal({ isClose }: { isClose: () => void }) {
           <Button type="button" variant="default" onClick={isClose}>
             취소
           </Button>
-          <Button variant="warn">회원탈퇴</Button>
+          <Button type="button" variant="warn" onClick={withdraw}>
+            회원탈퇴
+          </Button>
         </div>
       </div>
     </div>,

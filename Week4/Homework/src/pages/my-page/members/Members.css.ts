@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { themeVars } from "../../../styles/base/theme.css";
 
 export const container = style({
   display: "flex",
@@ -16,4 +17,10 @@ export const form = style({
   display: "flex",
   flexDirection: "column",
   gap: "1.5rem",
+});
+
+export const error = style({
+  margin: "1rem auto",
+  color: "red",
+  ...themeVars.text.caption1,
 });

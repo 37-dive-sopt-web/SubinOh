@@ -47,7 +47,7 @@ export function MyPageLayout() {
     { label: "내 정보", path: "/mypage" },
     { label: "회원 조회", path: "/mypage/members" },
     { label: "로그아웃", action: handleLogout },
-    { label: "회원 탈퇴", action: handleWithdraw },
+    { label: "회원 탈퇴", action: () => setIsOpen(true) },
   ];
 
   return (

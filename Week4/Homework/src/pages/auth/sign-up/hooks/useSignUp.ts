@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import type { SignUpForm, SignUpReq } from "../../../../types/signup";
+import type { SignUp, SignUpReq } from "../../../../types/signup";
 import { useMutation } from "@tanstack/react-query";
 import { signupMutationOptions } from "../../../../apis/mutations/signup";
 
-const INITIAL_FORM_DATA: SignUpForm = {
+const INITIAL_FORM_DATA: SignUp = {
   id: "",
   password: "",
   passwordConfirm: "",
@@ -17,7 +17,7 @@ export function useSignUp() {
   const navigate = useNavigate();
   const { mutate: signupMutate } = useMutation(signupMutationOptions.signup);
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState<SignUpForm>(INITIAL_FORM_DATA);
+  const [formData, setFormData] = useState<SignUp>(INITIAL_FORM_DATA);
 
   // 1. 이벤트 핸들링 함수
   const handleChangeFormData = (e: React.ChangeEvent<HTMLInputElement>) => {

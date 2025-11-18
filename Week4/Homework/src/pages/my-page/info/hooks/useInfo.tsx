@@ -1,12 +1,12 @@
 import { useState } from "react";
-import type { UpdateUserReq, User } from "../../../../types/user";
+import type { UserReq } from "../../../../types/user";
 
-export function useInfo(modifyMutate: (data: UpdateUserReq) => void) {
-  const [userData, setUserData] = useState<User>({
-    id: "",
+export function useInfo(modifyMutate: (data: UserReq) => void) {
+  const [username, setUsername] = useState("");
+  const [userData, setUserData] = useState<UserReq>({
     name: "",
     email: "",
-    age: "",
+    age: 0,
   });
 
   // 1. 이벤트 핸들링 함수
@@ -27,5 +27,12 @@ export function useInfo(modifyMutate: (data: UpdateUserReq) => void) {
     });
   };
 
-  return { userData, setUserData, handleChangeUserData, handleSubmit };
+  return {
+    username,
+    setUsername,
+    userData,
+    setUserData,
+    handleChangeUserData,
+    handleSubmit,
+  };
 }

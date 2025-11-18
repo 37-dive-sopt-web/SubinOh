@@ -1,29 +1,14 @@
-export interface User {
+export interface DefaultUser {
   id: string;
   name: string;
   email: string;
-  age: string;
+  age: number | string;
 }
 
-export interface UserInfo {
-  id: number;
+export interface User extends DefaultUser {
   username: string;
-  name: string;
-  email: string;
-  age: number;
   status: string;
 }
 
-export interface UserRes {
-  data: UserInfo;
-}
-
-export interface UpdateUserReq {
-  name: string;
-  email: string;
-  age: number;
-}
-
-export interface UpdateUserRes {
-  data: UserInfo;
-}
+export type UserReq = Omit<User, "id" | "username" | "status">;
+export type UserRes = User;

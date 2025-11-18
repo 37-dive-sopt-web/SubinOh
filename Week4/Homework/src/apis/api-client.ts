@@ -16,7 +16,6 @@ const http = ky.create({
           const message = await response.text();
           error = JSON.parse(message);
         }
-        console.log("부모 에러다: ", error);
         return error;
       },
     ],

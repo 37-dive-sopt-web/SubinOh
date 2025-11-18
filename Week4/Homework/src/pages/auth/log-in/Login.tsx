@@ -8,6 +8,7 @@ import type { LoginForm, LoginRes } from "../../../types/login";
 import { useMutation } from "@tanstack/react-query";
 import { loginMutationOptions } from "../../../apis/mutations/login";
 import { setUserId } from "../../../utils/auth-storage";
+import type { ApiResponse } from "../../../types/common";
 
 export function Login() {
   const navigate = useNavigate();
@@ -43,8 +44,10 @@ export function Login() {
       password: formData.password,
     };
     loginMutate(data, {
-      onSuccess: (res: LoginRes) => {
-        setUserId(res.data.userId);
+      onSuccess: (res: ApiResponse<LoginRes>) => {
+        if (res.data?.userId) {
+          setUserId(res.data?.userId);
+        }
         navigate("/mypage");
       },
       onError: (err) => {

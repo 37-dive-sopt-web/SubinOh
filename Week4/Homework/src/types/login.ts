@@ -8,8 +8,6 @@ export interface LoginReq {
 }
 
 export interface LoginRes {
-  data: {
-    userId: number;
-    message: string;
-  };
+  userId: number;
+  message: string;
 }

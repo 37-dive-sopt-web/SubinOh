@@ -46,7 +46,7 @@ export function SignUp() {
         <Step3
           name={formData.name}
           email={formData.email}
-          age={formData.age}
+          age={String(formData.age)}
           handleSubmit={handleSubmit}
           handleChangeFormData={handleChangeFormData}
         />

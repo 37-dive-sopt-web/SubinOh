@@ -7,7 +7,6 @@ import { useSearch } from "./hooks/useSearch";
 export function Members() {
   const { userId, handleUserId, handleSearch, userInfo, isError, error } =
     useSearch();
-
   return (
     <div className={styles.container}>
       <h2>내 정보</h2>

@@ -56,7 +56,10 @@ export function MyPageLayout() {
         <header className={styles.header}>
           <div className={styles.TitleBox}>
             <h1 className={styles.Title}>마이페이지</h1>
-            <span>안녕하세요. {data?.name}님</span>
+            <span>
+              안녕하세요. {data?.data !== null ? data?.data.name : "정보없음."}
+              님
+            </span>
           </div>
           {/** 데스크탑 화면 메뉴탭 */}
           <div className={styles.TabBox}>

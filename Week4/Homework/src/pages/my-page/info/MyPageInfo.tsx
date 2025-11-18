@@ -19,19 +19,25 @@ export function MyPageInfo() {
       alert("정보 저장에 실패했어요");
     },
   });
-  const { userData, setUserData, handleChangeUserData, handleSubmit } =
-    useInfo(modifyMutate);
+  const {
+    username,
+    setUsername,
+    userData,
+    setUserData,
+    handleChangeUserData,
+    handleSubmit,
+  } = useInfo(modifyMutate);
 
   useEffect(() => {
-    if (data) {
+    if (data?.data) {
+      setUsername(data.data.username);
       setUserData({
-        id: data?.username,
-        name: data?.name,
-        email: data?.email,
-        age: String(data?.age),
+        name: data?.data.name,
+        email: data?.data.email,
+        age: String(data?.data.age),
       });
     }
-  }, [data, setUserData]);
+  }, [data, setUserData, setUsername]);
 
   return (
     <div className={styles.container}>
@@ -42,7 +48,7 @@ export function MyPageInfo() {
         <>
           <div className={styles.idContainer}>
             <span className={styles.caption}>아이디</span>
-            <span className={styles.id}>{userData.id}</span>
+            <span className={styles.id}>{username}</span>
           </div>
           <div className={styles.form}>
             <InputBox
@@ -68,7 +74,7 @@ export function MyPageInfo() {
               type="number"
               id="age"
               name="age"
-              value={userData.age}
+              value={String(userData.age)}
               placeholder=""
               onChange={(e) => handleChangeUserData(e)}
             />

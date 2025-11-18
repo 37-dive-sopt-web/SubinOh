@@ -1,7 +1,7 @@
-import type { UserInfo } from "../../../../../types/user";
+import type { UserRes } from "../../../../../types/user";
 import * as styles from "./Result.css";
 interface ResultProps {
-  userInfo: UserInfo;
+  userInfo: UserRes;
 }
 
 export function Result({ userInfo }: ResultProps) {

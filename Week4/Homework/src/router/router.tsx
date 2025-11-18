@@ -4,6 +4,7 @@ import { SignUp } from "../pages/auth/sign-up/SignUp";
 import { MyPageLayout } from "../pages/my-page/MyPageLayout";
 import { MyPageInfo } from "../pages/my-page/info/MyPageInfo";
 import { Members } from "../pages/my-page/members/Members";
+import { PrivateRoute } from "./private-route";
 
 export const router = createBrowserRouter([
   {
@@ -16,11 +17,16 @@ export const router = createBrowserRouter([
   },
   { path: "/signup", element: <SignUp /> },
   {
-    path: "/mypage",
-    element: <MyPageLayout />,
+    element: <PrivateRoute />,
     children: [
-      { index: true, element: <MyPageInfo /> },
-      { path: "members", element: <Members /> },
+      {
+        path: "/mypage",
+        element: <MyPageLayout />,
+        children: [
+          { index: true, element: <MyPageInfo /> },
+          { path: "members", element: <Members /> },
+        ],
+      },
     ],
   },
 ]);

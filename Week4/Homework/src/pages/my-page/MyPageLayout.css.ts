@@ -17,6 +17,10 @@ export const header = style({
   padding: "1.5rem 5rem",
   color: themeVars.color.white[700],
   backgroundColor: themeVars.color.pink[500],
+
+  ...screen.md({
+    padding: "1.5rem 2rem",
+  }),
 });
 
 export const TitleBox = style({
